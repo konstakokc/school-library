@@ -1,13 +1,13 @@
 package library.DAO;
 
 import java.util.List;
-import library.model.Student;
+import library.model.Book;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class StudentDaoImpl implements StudentDAO {
+public class BookDAOImpl implements BookDAO {
 
     private SessionFactory sessionFactory;
 
@@ -16,41 +16,42 @@ public class StudentDaoImpl implements StudentDAO {
     }
 
     @Override
-    public void addStudent(Student student) {
+    public void addBook(Book book) {
         Session session = sessionFactory.getCurrentSession();
-        session.persist(student);
+        session.persist(book);
     }
 
     @Override
-    public void updateStudent(Student student) {
+    public void updateBook(Book book) {
         Session session = sessionFactory.getCurrentSession();
-        session.update(student);
+        session.update(book);
 
     }
 
     @Override
-    public List<Student> listStudents() {
+    @SuppressWarnings("unchecked")
+    public List<Book> listBooks() {
         Session session = sessionFactory.getCurrentSession();
-        List<Student> students = session.createQuery("from Student").list();
-        for (Student student : students) {
-            System.out.println(student.toString());
+        List<Book> books = session.createQuery("from Book").list();
+        for (Book book : books) {
+            System.out.println(book.toString());
         }
-        return students;
+        return books;
     }
 
     @Override
-    public Student getStudentById(int id) {
+    public Book getBookById(int id) {
         Session session = sessionFactory.getCurrentSession();
-        Student student = session.load(Student.class, id);
-        return student;
+        Book book = session.load(Book.class, id);
+        return book;
     }
 
     @Override
-    public void deleteStudent(int id) {
+    public void deleteBook(int id) {
         Session session = sessionFactory.getCurrentSession();
-        Student student = session.load(Student.class, id);
-        if (student != null) {
-            session.delete(student);
+        Book book = session.load(Book.class, id);
+        if (book != null) {
+            session.delete(book);
         }
 
     }
