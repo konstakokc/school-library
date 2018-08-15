@@ -1,12 +1,12 @@
 package library.DAO;
 
 import java.util.List;
-import library.model.Student;
+import library.model.Book;
 
-public interface StudentDAO {
-    void addStudent(Student student);
-    void updateStudent(Student student);
-    List<Student> listStudents();
-    Student getStudentById(int id);
-    void deleteStudent(int id);
+public interface BookDAO {
+    void addBook(Book book);
+    void updateBook(Book book);
+    List<Book> listBooks();
+    Book getBookById(int id);
+    void deleteBook(int id);
 }

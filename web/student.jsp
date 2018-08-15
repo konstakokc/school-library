@@ -26,39 +26,32 @@
 <%--modelAttribute commandName--%>
 <form:form action="${addAction}" modelAttribute="student">
     <table>
-        <c:if test="${!empty student.name}">
+        <c:if test="${!empty student.firstName}">
             <tr>
                 <td><form:label path="id">ID</form:label></td>
                 <td><form:input path="id" readonly="true"/></td>
             </tr>
         </c:if>
         <tr>
-            <td>
-                <form:label path="name">
-                    <spring:message text="Name"/>
-                </form:label>
-            </td>
-            <td>
-                <form:input path="name" />
-            </td>
+            <td><form:label path="firstName"><spring:message text="First Name"/></form:label></td>
+            <td><form:input path="firstName" /></td>
         </tr>
         <tr>
-            <td>
-                <form:label path="country">
-                    <spring:message text="Country"/>
-                </form:label>
-            </td>
-            <td>
-                <form:input path="country" />
-            </td>
+            <td><form:label path="lastName"><spring:message text="Last Name"/></form:label></td>
+            <td><form:input path="lastName" /></td>
+        </tr>
+        <%--*****************************ALL fields********************--%>
+        <tr>
+            <td><form:label path="group"><spring:message text="Group"/></form:label></td>
+            <td><form:input path="group" /></td>
         </tr>
         <tr>
             <td colspan="2">
-                <c:if test="${!empty student.name}">
-                    <input type="submit" value="<spring:message text="Edit Person"/>" />
+                <c:if test="${!empty student.firstName}">
+                    <input type="submit" value="<spring:message text="Edit Student"/>" />
                 </c:if>
-                <c:if test="${empty student.name}">
-                    <input type="submit" value="<spring:message text="Add Person"/>" />
+                <c:if test="${empty student.firstName}">
+                    <input type="submit" value="<spring:message text="Add Student"/>" />
                 </c:if>
             </td>
         </tr>
@@ -79,7 +72,7 @@
         <c:forEach items="${listStudents}" var="person">
             <tr>
                 <td>${student.id}</td>
-                <td>${student.name}</td>
+                <td>${student.firstName}</td>
                 <td>${student.lastName}</td>
                 <td>${student.group}</td>
                 <td><a href="<c:url value='/${student.id}' />" >Edit</a></td>

@@ -1,42 +1,42 @@
 package library.service;
 
 import java.util.List;
-import library.DAO.StudentDAO;
-import library.model.Student;
+import library.DAO.BookDAO;
+import library.model.Book;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class StudentServiceImpl implements StudentService {
+public class BookServiceImpl implements BookService {
 
-    private StudentDAO studentDAO;
+    private BookDAO bookDAO;
 
-    public void setStudentDAO(StudentDAO studentDAO) {
-        this.studentDAO = studentDAO;
+    public void setBookDAO(BookDAO bookDAO) {
+        this.bookDAO = bookDAO;
     }
 
     @Transactional
-    public void addStudent(Student student) {
-        this.studentDAO.addStudent(student);
+    public void addBook(Book book) {
+        this.bookDAO.addBook(book);
     }
 
     @Transactional
-    public void updateStudent(Student student) {
-        this.studentDAO.updateStudent(student);
+    public void updateBook(Book book) {
+        this.bookDAO.updateBook(book);
     }
 
     @Transactional
-    public List<Student> listStudents() {
-        return this.studentDAO.listStudents();
+    public List<Book> listBooks() {
+        return this.bookDAO.listBooks();
     }
 
     @Transactional
-    public Student getStudentById(int id) {
-        return this.studentDAO.getStudentById(id);
+    public Book getBookById(int id) {
+        return this.bookDAO.getBookById(id);
     }
 
     @Transactional
-    public void deleteStudent(int id) {
-        this.studentDAO.deleteStudent(id);
+    public void deleteBook(int id) {
+        this.bookDAO.deleteBook(id);
     }
 }

@@ -1,7 +1,7 @@
 package library.controller;
 
-import library.model.Student;
-import library.service.StudentService;
+import library.model.Book;
+import library.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -12,42 +12,42 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class StudentController {
-    private StudentService studentService;
+public class BookController {
+    private BookService bookService;
 
     @Autowired
-    @Qualifier(value = "studentService")
-    public void setStudentService(StudentService studentService) {
-        this.studentService = studentService;
+    @Qualifier(value = "bookService")
+    public void setBookService(BookService bookService) {
+        this.bookService = bookService;
     }
 
-    @GetMapping(value = "/students")
-    public String listStudents(Model model) {
-        model.addAttribute("student", new Student());
-        model.addAttribute("listStudents", studentService.listStudents());
-        return "student";
+    @GetMapping(value = "/books")
+    public String listBooks(Model model) {
+        model.addAttribute("book", new Book());
+        model.addAttribute("listBooks", bookService.listBooks());
+        return "book";
     }
 
-    @PostMapping(value = "/student/add")
-    public String addStudent(Student student) {
-        if (student.getId() == 0) {
-            this.studentService.addStudent(student);
+    @PostMapping(value = "/book/add")
+    public String addBook(Book book) {
+        if (book.getId() == 0) {
+            this.bookService.addBook(book);
         } else {
-            this.studentService.updateStudent(student);
+            this.bookService.updateBook(book);
         }
-        return "redirect:/students";
+        return "redirect:/books";
     }
 
     @RequestMapping(value = "/remove/{id}")
-    public String deleteStudent(@PathVariable("id") int id) {
-        this.studentService.deleteStudent(id);
-        return "redirect:/students";
+    public String deleteBook(@PathVariable("id") int id) {
+        this.bookService.deleteBook(id);
+        return "redirect:/books";
     }
 
     @RequestMapping(value = "/{id}")
-    public String editStudent(@PathVariable("id") int id, Model model) {
-        model.addAttribute("student", this.studentService.getStudentById(id));
-        model.addAttribute("listStudents", this.studentService.listStudents());
-        return "student";
+    public String editBook(@PathVariable("id") int id, Model model) {
+        model.addAttribute("book", this.bookService.getBookById(id));
+        model.addAttribute("listBooks", this.bookService.listBooks());
+        return "book";
     }
 }

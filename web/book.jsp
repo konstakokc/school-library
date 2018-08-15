@@ -4,7 +4,7 @@
 <%@ page session="false" %>
 <html>
 <head>
-    <title>Student Page</title>
+    <title>Book Page</title>
     <style type="text/css">
         .tg  {border-collapse:collapse;border-spacing:0;border-color:#ccc;}
         .tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;
@@ -18,72 +18,68 @@
     </style>
 </head>
 <body>
-<h1>
-    Add a Student
-</h1>
+<h1>Add a Book</h1>
 
-<c:url var="addAction" value="/student/add" />
+<c:url var="addAction" value="/book/add" />
 <%--modelAttribute commandName--%>
-<form:form action="${addAction}" modelAttribute="student">
+<form:form action="${addAction}" modelAttribute="book">
     <table>
-        <c:if test="${!empty student.firstName}">
+        <c:if test="${!empty book.name}">
             <tr>
                 <td><form:label path="id">ID</form:label></td>
                 <td><form:input path="id" readonly="true"/></td>
             </tr>
         </c:if>
         <tr>
-            <td>
-                <form:label path="name">
-                    <spring:message text="Name"/>
-                </form:label>
-            </td>
-            <td>
-                <form:input path="firstName" />
-            </td>
+            <td><form:label path="name"><spring:message text="Name"/></form:label></td>
+            <td><form:input path="name" /></td>
         </tr>
         <tr>
-            <td>
-                <form:label path="country">
-                    <spring:message text="Country"/>
-                </form:label>
-            </td>
-            <td>
-                <form:input path="" />
-            </td>
+            <td><form:label path="author"><spring:message text="Author"/></form:label></td>
+            <td><form:input path="author" /></td>
+        </tr>
+        <tr>
+            <td><form:label path="genre"><spring:message text="Genre"/></form:label></td>
+            <td><form:input path="genre" /></td>
+        </tr>
+        <tr>
+            <td><form:label path="country"><spring:message text="Country"/></form:label></td>
+            <td><form:input path="country" /></td>
         </tr>
         <tr>
             <td colspan="2">
-                <c:if test="${!empty student.name}">
-                    <input type="submit" value="<spring:message text="Edit Person"/>" />
+                <c:if test="${!empty book.name}">
+                    <input type="submit" value="<spring:message text="Edit Book"/>" />
                 </c:if>
-                <c:if test="${empty student.name}">
-                    <input type="submit" value="<spring:message text="Add Person"/>" />
+                <c:if test="${empty book.name}">
+                    <input type="submit" value="<spring:message text="Add Book"/>" />
                 </c:if>
             </td>
         </tr>
     </table>
 </form:form>
 <br>
-<h3>Students List</h3>
-<c:if test="${!empty listStudents}">
+<h3>Books List</h3>
+<c:if test="${!empty listBooks}">
     <table class="tg">
         <tr>
-            <th width="80">Student ID</th>
-            <th width="120">Student Name</th>
-            <th width="120">Student Last name</th>
-            <th width="100">Student Group</th>
+            <th width="80">Book ID</th>
+            <th width="120">Book Name</th>
+            <th width="120">Book Author</th>
+            <th width="100">Book Genre</th>
+            <th width="100">Book Country</th>
             <th width="60">Edit</th>
             <th width="60">Delete</th>
         </tr>
-        <c:forEach items="${listStudents}" var="person">
+        <c:forEach items="${listBooks}" var="person">
             <tr>
-                <td>${student.id}</td>
-                <td>${student.firstName}</td>
-                <td>${student.lastName}</td>
-                <td>${student.group}</td>
-                <td><a href="<c:url value='/${student.id}' />" >Edit</a></td>
-                <td><a href="<c:url value='/remove/${student.id}' />" >Delete</a></td>
+                <td>${book.id}</td>
+                <td>${book.name}</td>
+                <td>${book.author}</td>
+                <td>${book.genre}</td>
+                <td>${book.country}</td>
+                <td><a href="<c:url value='/${book.id}' />" >Edit</a></td>
+                <td><a href="<c:url value='/remove/${book.id}' />" >Delete</a></td>
             </tr>
         </c:forEach>
     </table>

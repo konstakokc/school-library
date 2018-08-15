@@ -18,7 +18,8 @@
     <facet type="hibernate" name="Hibernate">
       <configuration>
         <datasource-map>
-          <unit-entry name="hibernate.cfg.xml" />
+          <unit-entry name="hibernate.cfg.xml" value="4e3788b7-37c8-49ff-a889-72374e1e0812" />
+          <unit-entry name="hibernate5AnnotatedSessionFactory" value="4e3788b7-37c8-49ff-a889-72374e1e0812" />
         </datasource-map>
         <naming-strategy-map />
         <deploymentDescriptor name="hibernate.cfg.xml" url="file://$MODULE_DIR$/src/main/java/hibernate.cfg.xml" />
