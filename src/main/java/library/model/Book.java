@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 
 @Entity
 public class Book extends NamedEntity {
+
     private String author;
     private String genre;
     private String country;
