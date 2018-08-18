@@ -19,10 +19,10 @@
       <configuration>
         <datasource-map>
           <unit-entry name="hibernate.cfg.xml" value="4e3788b7-37c8-49ff-a889-72374e1e0812" />
-          <unit-entry name="hibernate5AnnotatedSessionFactory" value="4e3788b7-37c8-49ff-a889-72374e1e0812" />
+          <unit-entry name="hibernate5AnnotatedSessionFactory" value="f545d2fa-cbc9-4761-a62b-6194d0995078" />
         </datasource-map>
         <naming-strategy-map />
-        <deploymentDescriptor name="hibernate.cfg.xml" url="file://$MODULE_DIR$/src/main/java/hibernate.cfg.xml" />
+        <deploymentDescriptor name="hibernate.cfg.xml" url="file://$MODULE_DIR$/src/main/resources/hibernate.cfg.xml" />
       </configuration>
     </facet>
   </component>

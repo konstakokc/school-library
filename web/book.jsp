@@ -26,7 +26,7 @@
     <table>
         <c:if test="${!empty book.name}">
             <tr>
-                <td><form:label path="id">ID</form:label></td>
+                <td><form:label path="id"><spring:message text="ID"/></form:label></td>
                 <td><form:input path="id" readonly="true"/></td>
             </tr>
         </c:if>
@@ -71,7 +71,7 @@
             <th width="60">Edit</th>
             <th width="60">Delete</th>
         </tr>
-        <c:forEach items="${listBooks}" var="person">
+        <c:forEach items="${listBooks}" var="book">
             <tr>
                 <td>${book.id}</td>
                 <td>${book.name}</td>
@@ -79,7 +79,7 @@
                 <td>${book.genre}</td>
                 <td>${book.country}</td>
                 <td><a href="<c:url value='/${book.id}' />" >Edit</a></td>
-                <td><a href="<c:url value='/remove/${book.id}' />" >Delete</a></td>
+                <td><a href="<c:url value='/book/remove/${book.id}' />" >Delete</a></td>
             </tr>
         </c:forEach>
     </table>

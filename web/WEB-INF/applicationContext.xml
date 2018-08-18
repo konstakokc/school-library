@@ -3,6 +3,7 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns:context="http://www.springframework.org/schema/context"
   xmlns:mvc="http://www.springframework.org/schema/mvc"
+  xmlns:tx="http://www.springframework.org/schema/tx"
   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
   <mvc:annotation-driven />
@@ -24,17 +25,25 @@
 
   <bean id="hibernate5AnnotatedSessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
     <property name="dataSource" ref="dataSource" />
+    <property name="hibernateProperties">
+      <props>
+        <!--<prop key="connection.url">jdbc:mysql://localhost:3306/school-library?useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC</prop>-->
+        <!--<prop key="connection.driver_class">com.mysql.cj.jdbc.Driver</prop>-->
+        <!--<prop key="connection.username">root</prop>-->
+        <!--<prop key="connection.password">mysqlpassword123</prop>-->
+        <prop key="hbm2ddl.auto">update</prop>
+        <prop key="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</prop>
+        <prop key="hibernate.show_sql">true</prop>
+        <prop key="current_session_context_class">thread</prop>
+      </props>
+    </property>
     <property name="annotatedClasses">
       <list>
         <value>library.model.Student</value>
         <value>library.model.Book</value>
+        <value>library.model.Loan</value>
+        <value>library.model.LoanID</value>
       </list>
-    </property>
-    <property name="hibernateProperties">
-      <props>
-        <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
-        <prop key="hibernate.show_sql">true</prop>
-      </props>
     </property>
   </bean>
 
@@ -52,6 +61,7 @@
     <property name="bookDAO" ref="bookDAO"/>
   </bean>
 
+  <tx:annotation-driven />
   <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
     <property name="sessionFactory" ref="hibernate5AnnotatedSessionFactory"/>
   </bean>

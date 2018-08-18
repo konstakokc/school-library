@@ -31,7 +31,7 @@ public class BookDAOImpl implements BookDAO {
     @Override
     @SuppressWarnings("unchecked")
     public List<Book> listBooks() {
-        Session session = sessionFactory.getCurrentSession();
+        Session session = this.sessionFactory.getCurrentSession();
         List<Book> books = session.createQuery("from Book").list();
         for (Book book : books) {
             System.out.println(book.toString());
@@ -42,14 +42,14 @@ public class BookDAOImpl implements BookDAO {
     @Override
     public Book getBookById(int id) {
         Session session = sessionFactory.getCurrentSession();
-        Book book = session.load(Book.class, id);
+        Book book = session.get(Book.class, id);
         return book;
     }
 
     @Override
     public void deleteBook(int id) {
         Session session = sessionFactory.getCurrentSession();
-        Book book = session.load(Book.class, id);
+        Book book = session.get(Book.class, id);
         if (book != null) {
             session.delete(book);
         }

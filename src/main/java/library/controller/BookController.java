@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,7 +30,7 @@ public class BookController {
     }
 
     @PostMapping(value = "/book/add")
-    public String addBook(Book book) {
+    public String addBook(@ModelAttribute("book") Book book) {
         if (book.getId() == 0) {
             this.bookService.addBook(book);
         } else {
@@ -38,7 +39,7 @@ public class BookController {
         return "redirect:/books";
     }
 
-    @RequestMapping(value = "/remove/{id}")
+    @RequestMapping(value = "/book/remove/{id}")
     public String deleteBook(@PathVariable("id") int id) {
         this.bookService.deleteBook(id);
         return "redirect:/books";

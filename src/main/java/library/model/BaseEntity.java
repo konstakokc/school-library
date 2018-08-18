@@ -32,9 +32,9 @@ import javax.persistence.MappedSuperclass;
 public class BaseEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private int id;
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
@@ -43,7 +43,7 @@ public class BaseEntity implements Serializable {
     }
 
     public boolean isNew() {
-        return this.id == null;
+        return this.id == 0;
     }
 
 }

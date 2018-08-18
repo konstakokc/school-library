@@ -28,7 +28,7 @@
     <table>
         <c:if test="${!empty student.firstName}">
             <tr>
-                <td><form:label path="id">ID</form:label></td>
+                <td><form:label path="id"><spring:message text="ID"/> </form:label></td>
                 <td><form:input path="id" readonly="true"/></td>
             </tr>
         </c:if>
@@ -63,20 +63,20 @@
     <table class="tg">
         <tr>
             <th width="80">Student ID</th>
-            <th width="120">Student Name</th>
+            <th width="120">Student First Name</th>
             <th width="120">Student Last name</th>
             <th width="100">Student Group</th>
             <th width="60">Edit</th>
             <th width="60">Delete</th>
         </tr>
-        <c:forEach items="${listStudents}" var="person">
+        <c:forEach items="${listStudents}" var="student">
             <tr>
                 <td>${student.id}</td>
                 <td>${student.firstName}</td>
                 <td>${student.lastName}</td>
                 <td>${student.group}</td>
-                <td><a href="<c:url value='/${student.id}' />" >Edit</a></td>
-                <td><a href="<c:url value='/remove/${student.id}' />" >Delete</a></td>
+                <td><a href="<c:url value='/student/${student.id}' />" >Edit</a></td>
+                <td><a href="<c:url value='/student/remove/${student.id}' />" >Delete</a></td>
             </tr>
         </c:forEach>
     </table>

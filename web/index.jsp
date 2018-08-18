@@ -1,3 +1,5 @@
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%--
   Created by IntelliJ IDEA.
   User: hp
@@ -12,5 +14,13 @@
   </head>
   <body>
   $END$
+  <%--<spring:select path="wow">--%>
+    <%--<form:option value="NONE" label="Select"/>--%>
+    <%--<form:options items="" itemLabel="" itemValue=""/>--%>
+  <%--</spring:select>--%>
+  <select title="TITLE">
+    <option value="wow">wow</option>
+    <option value="kek">kek</option>
+  </select>
   </body>
 </html>
