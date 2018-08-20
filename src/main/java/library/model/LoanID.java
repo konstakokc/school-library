@@ -38,6 +38,11 @@ public class LoanID implements Serializable {
     }
 
     @Override
+    public String toString() {
+        return studentID + "_" + bookID;
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;

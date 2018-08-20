@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.util.Objects;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.Table;
@@ -18,7 +17,6 @@ public class Loan {
 
     @ManyToOne
     @MapsId("studentID")
-//    @JoinColumn(name = "id")
     private Student student;
 
     @ManyToOne
