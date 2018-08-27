@@ -41,6 +41,7 @@
           <element id="library" level="project" name="Maven: org.springframework:spring-tx:5.0.8.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-web:5.0.8.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-webmvc:5.0.8.RELEASE" />
+          <element id="library" level="project" name="Maven: org.apache.commons:commons-lang3:3.7" />
         </element>
       </element>
     </root>

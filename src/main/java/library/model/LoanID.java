@@ -32,6 +32,12 @@ public class LoanID implements Serializable {
 
     public LoanID() {}
 
+    public LoanID(String id) {
+        String[] ids = id.split("_");
+        this.studentID = Integer.parseInt(ids[0]);
+        this.bookID = Integer.parseInt(ids[1]);
+    }
+
     public LoanID(int studentID, int bookID) {
         this.studentID = studentID;
         this.bookID = bookID;

@@ -1,15 +1,11 @@
 package library.controller;
 
-import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.Map;
-import library.model.Book;
 import library.model.Loan;
 import library.model.LoanID;
-import library.model.Student;
 import library.service.BookService;
 import library.service.LoanService;
 import library.service.StudentService;
+import org.apache.commons.lang3.tuple.MutablePair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -21,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequestMapping(value = "/loan")
 public class LoanController {
     private StudentService studentService;
     private BookService bookService;
@@ -50,44 +47,35 @@ public class LoanController {
         return "loans";
     }
 
-    @RequestMapping(value = "/loan")
+    @RequestMapping(value = "")
     public String loan(Model model) {
 
-        Map<String, String> students = new HashMap<>();
-        for (Student student : studentService.listStudents()) {
-            students.put(String.valueOf(student.getId()), student.getFirstName() + " " + student.getLastName());
-        }
-        model.addAttribute("listStudents", students);
-
-        Map<String, String> books = new HashMap<>();
-        for (Book book : bookService.listBooks()) {
-            books.put(String.valueOf(book.getId()), book.getName());
-        }
-        model.addAttribute("listBooks", books);
-
-        model.addAttribute("loan", new Loan());
+        model.addAttribute("listStudents", this.studentService.listStudents());
+        model.addAttribute("listBooks", this.bookService.listBooks());
+        model.addAttribute("studbookID", new MutablePair());
 
         return "loan";
     }
 
-    @PostMapping(value = "/loan/add")
-    public String addLoan(@ModelAttribute("loan") Loan loan) {
-        loan.setActive(true);
-        loan.setStartDate(LocalDate.now());
-        this.loanService.addLoan(loan);
-        return "redirect:/loans";
+    @PostMapping(value = "/add")
+    public String addLoan(@ModelAttribute("studbookID") MutablePair<String, String> studbookID) {
+        this.loanService.addLoan(Integer.parseInt(studbookID.left), Integer.parseInt(studbookID.right));
+        return "redirect:/loan/loans";
     }
 
-    @RequestMapping(value = "/loan/return/{loanID}")
+    @RequestMapping(value = "/returnPage/{loanID}")
+    public String returnLoan(@PathVariable("loanID") LoanID loanID, Model model) {
+        Loan loan = this.loanService.getLoanById(loanID);
+        model.addAttribute("loan", loan);
+        model.addAttribute("debt", loan.calculateDebt());
+
+        return "returnLoan";
+    }
+
+    @RequestMapping(value = "/return/{loanID}")
     public String returnLoan(@PathVariable("loanID") LoanID loanID) {
+        this.loanService.returnLoan(loanID);
 
-        //-------------------------//
-        //Return logic HERE (date)
-        //-------------------------//
-
-        Loan toBeReturned = this.loanService.getLoanById(loanID);
-        toBeReturned.setActive(false);
-        this.loanService.updateLoan(toBeReturned);
-        return "redirect:/loans";
+        return "redirect:/loan/loans";
     }
 }

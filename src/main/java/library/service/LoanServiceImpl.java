@@ -2,8 +2,10 @@ package library.service;
 
 import java.util.List;
 import library.DAO.LoanDAO;
+import library.model.Book;
 import library.model.Loan;
 import library.model.LoanID;
+import library.model.Student;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,6 +25,11 @@ public class LoanServiceImpl implements LoanService {
     }
 
     @Transactional
+    public void addLoan(int studentID, int bookID) {
+        this.loanDAO.addLoan(studentID, bookID);
+    }
+
+    @Transactional
     public void updateLoan(Loan loan) {
         this.loanDAO.updateLoan(loan);
     }
@@ -38,7 +45,12 @@ public class LoanServiceImpl implements LoanService {
     }
 
     @Transactional
-    public void deleteLoan(int id) {
-        this.loanDAO.deleteLoan(id);
+    public  void returnLoan(LoanID loanID) {
+        this.loanDAO.returnLoan(loanID);
+    }
+
+    @Transactional
+    public void deleteLoan(LoanID loanID) {
+        this.loanDAO.deleteLoan(loanID);
     }
 }

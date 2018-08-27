@@ -6,8 +6,10 @@ import library.model.LoanID;
 
 public interface LoanDAO {
     void addLoan(Loan loan);
+    void addLoan(int studentID, int bookID);
     void updateLoan(Loan loan);
     List<Loan> listLoans();
     Loan getLoanById(LoanID loanID);
-    void deleteLoan(int id);
+    void returnLoan(LoanID loanID);
+    void deleteLoan(LoanID loanID);
 }

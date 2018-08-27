@@ -27,7 +27,7 @@
                 <td>${loan.book.name}</td>
                 <td>${loan.startDate}</td>
                 <td>${loan.active}</td>
-                <td><a href="<c:url value='/book/return/${loan.loanID}' />" >Delete</a></td>
+                <td><a href="<c:url value='/loan/returnPage/${loan.loanID}' />" >Delete</a></td>
             </tr>
         </c:forEach>
     </table>

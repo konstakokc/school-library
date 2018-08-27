@@ -1,8 +1,10 @@
 package library.DAO;
 
 import java.util.List;
+import library.model.Book;
 import library.model.Loan;
 import library.model.LoanID;
+import library.model.Student;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
@@ -19,6 +21,17 @@ public class LoanDAOImpl implements LoanDAO {
     @Override
     public void addLoan(Loan loan) {
         Session session = sessionFactory.getCurrentSession();
+        session.persist(loan);
+    }
+
+    @Override
+    public void addLoan(int studentID, int bookID) {
+        Session session = sessionFactory.getCurrentSession();
+        Student student = session.load(Student.class, studentID);
+        Book book = session.load(Book.class, bookID);
+        Loan loan = new Loan(student, book);
+        student.getBooks().add(loan);
+        book.getStudents().add(loan);
         session.persist(loan);
     }
 
@@ -43,14 +56,21 @@ public class LoanDAOImpl implements LoanDAO {
     @Override
     public Loan getLoanById(LoanID loanID) {
         Session session = sessionFactory.getCurrentSession();
-        Loan loan = session.get(Loan.class, loanID);
-        return loan;
+        return session.get(Loan.class, loanID);
     }
 
     @Override
-    public void deleteLoan(int id) {
+    public void returnLoan(LoanID loanID) {
         Session session = sessionFactory.getCurrentSession();
-        Loan loan = session.get(Loan.class, id);
+        Loan loan = session.load(Loan.class, loanID);
+        loan.setActive(false);
+        session.update(loan);
+    }
+
+    @Override
+    public void deleteLoan(LoanID loanID) {
+        Session session = sessionFactory.getCurrentSession();
+        Loan loan = session.get(Loan.class, loanID);
         if (loan != null) {
             session.delete(loan);
         }

@@ -43,4 +43,9 @@ public class Student extends Person {
     public void setGroup(String group) {
         this.group = group;
     }
+
+    @Override
+    public String toString() {
+        return getFirstName() + " " + getLastName();
+    }
 }

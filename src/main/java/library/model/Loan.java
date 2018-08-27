@@ -1,6 +1,8 @@
 package library.model;
 
 import java.time.LocalDate;
+import java.time.Month;
+import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -77,6 +79,11 @@ public class Loan {
     }
 
     @Override
+    public String toString() {
+        return student.getFirstName() + " " + student.getLastName() + ": " + book.getName();
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -93,5 +100,21 @@ public class Loan {
     @Override
     public int hashCode() {
         return Objects.hash(student, book, active);
+    }
+
+    public Long calculateDebt() {
+        LocalDate now = LocalDate.now();
+        LocalDate yearEnd;
+        if(startDate.getMonth().getValue() > Month.AUGUST.getValue()) {
+            yearEnd = LocalDate.of(startDate.getYear() + 1, Month.MAY, Month.MAY.length(false));
+        } else {
+            yearEnd = LocalDate.of(startDate.getYear(), Month.MAY, Month.MAY.length(false));
+        }
+
+        if (now.isBefore(yearEnd)) {
+            return 0L;
+        } else {
+            return ChronoUnit.DAYS.between(yearEnd, now) * 10;
+        }
     }
 }

@@ -21,7 +21,6 @@
 <h1>Add a Book</h1>
 
 <c:url var="addAction" value="/book/add" />
-<%--modelAttribute commandName--%>
 <form:form action="${addAction}" modelAttribute="book">
     <table>
         <c:if test="${!empty book.name}">
